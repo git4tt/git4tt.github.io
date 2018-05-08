@@ -2,9 +2,9 @@
 	"name":"Note",
 	"short_name":"Note",
 	"icons":[{
-		"src":"icon.png",
+		"src":"icon-144x144.png",
 		"type":"image/png",
-		"sizes":"48x48"
+		"sizes":"144x144"
 	}],
 	"start_url":"/",
 	"scope":"/",
