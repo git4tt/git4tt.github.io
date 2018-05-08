@@ -1,13 +1,74 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link rel="manifest" href="manifest.json">
+<html style="height: 100%;">
 
-		<title>Hello World</title>
-	</head>
-	<body>
-		<p>Hello World!</p>
-	</body>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#dddddd">
+	<meta name="viewport" content="width=device-width , initial-scale=1,maximum-scale=1,user-scalable=no">
+	<link rel="manifest" href="manifest.json">
+	<style type="text/css">
+		body{
+			font-family: sans-serif;
+		}
+		textarea{
+			width: 100%;
+			height: 50%;
+		}
+		#save{
+			background: #000;
+			color: #fff;
+			padding: 5px 20px;
+			cursor: pointer;
+			box-shadow: 2px 2px 2px #aaa;
+			float: right;
+		}
+		#save:hover{
+			box-shadow: 3px 3px 3px #aaa;
+		}
+		#save:active{
+			box-shadow: 1px 1px 1px #aaa;
+		}
+		small{
+			float: right;
+		}
+	</style>
+	<script type="text/javascript">
+		function setCookie(cname,cvalue,exdays){
+		  var d = new Date();
+		  d.setTime(d.getTime()+(exdays*24*60*60*1000));
+		  var expires = "expires="+d.toGMTString();
+		  document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+		function getCookie(cname){
+		  var name = cname + "=";
+		  var ca = document.cookie.split(';');
+		  for(var i=0; i<ca.length; i++) 
+		  {
+		    var c = ca[i].trim();
+		    if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+		  }
+		  return "";
+		}
+		function mchange() {
+			var me=document.getElementById("content")
+			var str=me.value.split("\n").join("\\n")
+			setCookie("content",str,365)
+			alert("Saved ")
+		}
+	</script>
+</head>
+<body style="height: 100%;">
+<textarea id="content"></textarea>
+<a id="save" onclick="mchange()">save</a><br><br><br>
+<script type="text/javascript">
+	var me=document.getElementById("content")
+	me.value=getCookie("content").split("\\n").join("\n")
+	if('serviceWorker' in navigator) {
+	  navigator.serviceWorker
+	           .register('sw.js',{scope:"/pwa-note/"})
+	           .then(function() { console.log("Service Worker Registered"); });
+	}
+</script>
+</body>
 </html>
